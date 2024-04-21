@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</html>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+    
+    .gallery {
+        width: 1500px; 
+        overflow: hidden;
+        border: 1px solid #ccc;
+        position: relative;
+    }
+    
+    .image-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        gap: 10px;
+    }
+    
+    .image {
+        width: 200px;
+        height: auto;
+    }  
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    .prev {
+        left: 0;
+    }
+    
+    .next {
+        right: 0;
+    }  
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(0); } /* Adjust according to image width */
+    }
+    .slide-animation {
+        animation: slide 3s;
+    }
+</style>
+    <div class="gallery">
+        <div class="image-container slide-animation">
+            <img class="image" src="./img-g-1.jpeg" alt="Image 1">
+            <img class="image" src="./img-g-2.png" alt="Image 2">
+            <img class="image" src="./img-g-3.jpeg" alt="Image 3">
+            <img class="image" src="./img-g-4.jpeg" alt="Image 4">
+            <img class="image" src="./img-g-5.jpeg" alt="Image 5">
+            <img class="image" src="./img-g-6.jpeg" alt="Image 6">
+            <img class="image" src="./img-g-7.jpeg" alt="Image 7">
+            <img class="image" src="./img-g-8.jpeg" alt="Image 8">
+            <img class="image" src="./img-g-9.jpeg" alt="Image 9">
+            <img class="image" src="./img-g-10.png" alt="Image 10">
+            <img class="image" src="./img-g-11.jpeg" alt="Image 11">
+            <img class="image" src="./img-g-12.jpeg" alt="Image 12">
+            <img class="image" src="./img-g-13.jpeg" alt="Image 13">
+        </div>
+        <div class="prev" onclick="scrollGallery(-1)">prev</div>
+        <div class="next" onclick="scrollGallery(1)">Next</div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image');
+        const totalImages = images.length;
+
+        function scrollGallery(direction) {
+            currentIndex = (currentIndex + direction + totalImages) % totalImages;
+            const distance = -currentIndex * 100;
+            document.querySelector('.image-container').style.transform = `translateX(${distance}px)`;
+        }
+    </script>
+</body>
